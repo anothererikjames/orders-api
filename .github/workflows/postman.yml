@@ -1,0 +1,25 @@
+name: Postman CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  postman:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: curl -o- "https://dl-cli.pstmn.io/install/linux.sh" | sh
+
+      - name: Run collection
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          postman collection run "52238111-ebd01cfa-4c43-4984-87ee-0942439ee52e" \\
+            -e "52238111-0ba201c4-46d1-4a53-b061-ef7241fbfda2" \\
+            --report-events \\
+            --api-key "$POSTMAN_API_KEY"

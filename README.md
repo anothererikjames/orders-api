@@ -1,2 +1,5 @@
 # orders-api
-Orders API — demo service for Postman Insights discovery
+
+Postman Insights demo service.
+
+_Last updated: 2026-03-06_
